@@ -10,7 +10,9 @@
 mod_name_of_module1_ui <- function(id){
   ns <- NS(id)
   tagList(
-    plotOutput(ns("plot"))
+    fluidPage(
+      plotOutput(ns("plot"))
+    )
   )
 }
     

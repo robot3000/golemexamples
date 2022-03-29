@@ -5,20 +5,118 @@
 #' @import shiny
 #' @noRd
 app_ui <- function(request) {
+  
+  # tags$style(
+  #   ".box-header {
+  #     background-color: #f48107
+  #   }")
+    
   tagList(
     # Leave this function for adding external resources
     golem_add_external_resources(),
-    # List the first level UI elements here 
-      htmlTemplate(
-        app_sys("app/www/template.html"), 
-        first = mod_name_of_module1_ui("name_of_module1_ui_1"), 
-        second = mod_name_of_module2_ui("name_of_module2_ui_1"), 
-        third = mod_name_of_module3_ui("name_of_module3_ui_1"), 
-        fourth = mod_name_of_module4_ui("name_of_module4_ui_1"), 
-        fifth = mod_name_of_module5_ui("name_of_module5_ui_1"),
-        sixth = mod_name_of_module5_ui("name_of_module5_ui_2")
+    #List the first level UI elements here
+    htmlTemplate(
+      app_sys("app/www/template.html"),
+      #app_sys("app/www/imgrow.html"),
+      first = mod_name_of_module1_ui("name_of_module1_ui_1"),
+      second = mod_name_of_module2_ui("name_of_module2_ui_1"),
+      third = mod_name_of_module3_ui("name_of_module3_ui_1"),
+      fourth = mod_name_of_module4_ui("name_of_module4_ui_1"),
+      fifth = mod_name_of_module5_ui("name_of_module5_ui_1"),
+      sixth = mod_name_of_module5_ui("name_of_module5_ui_2")
+    ),
+  
+    
+    fluidPage(
+      fluidRow(
+        column(2,
+               h3("sidebar"),
+               shinydashboard::sidebarMenu(id="sidebar", .list = c("asf", "asdf", "asdf"))
+        ),
+        column(10, 
+               shinydashboard::box( class=".box-header",
+                   title = "INPUTS", status = "warning", solidHeader = TRUE,
+                   h3("Infos"),
+                   shinydashboard::box(width=12, htmlOutput("asdöfkasdfj")),
+                   br(),
+                   h3("Abfragezeitraum"),
+                   shinydashboard::box(width=12, 
+                        shinyWidgets::pickerInput("INPUT_JAHRE",choices=c(2000,2993,3393)),
+                        br(),
+                        h3("Raumebenen"),
+                        h4("untertiel"),
+                        shinydashboard::box(width=12, shinyWidgets::pickerInput("INPUT_x1",choices=c(2000,2993,3393))),
+                        shinydashboard::box(width=12, shinyWidgets::pickerInput("INPUT_x2",choices=c(2000,2993,3393))),
+                        shinydashboard::box(shinyWidgets::pickerInput("INPUT_x3",choices=c(2000,2993,3393))),
+                        shinydashboard::box(
+                          title = "smaller box", status = "warning", solidHeader = TRUE,
+                          "Box content here", br(), "More box content",
+                          sliderInput("slider", "Slider input:", 1, 100, 50),
+                          textInput("text", "Text input:")
+                        )
+                   )
+            ) # big box
       )
-    )
+     )
+    ), # END FLUID PAGE,
+      
+    fluidPage(
+      fluidRow(
+        column(2,
+               "sidebar"
+        ),
+        column(10, 
+               h3("Infos"),
+               shinydashboard::box(width=12, htmlOutput("asdöfkasdfj")),
+               br(),
+               h3("Abfragezeitraum"),
+               shinydashboard::box(width=12, shinyWidgets::pickerInput("INPUT_JAHRE",choices=c(2000,2993,3393)),
+                                   br(),
+                                   h3("Raumebenen"),
+                                   h4("untertiel"),
+                                   shinydashboard::box(width=12, shinyWidgets::pickerInput("INPUT_x1",choices=c(2000,2993,3393))),
+                                   shinydashboard::box(width=12, shinyWidgets::pickerInput("INPUT_x2",choices=c(2000,2993,3393))),
+                                   shinydashboard::box(shinyWidgets::pickerInput("INPUT_x3",choices=c(2000,2993,3393))),
+                                   shinydashboard::box(
+                                     title = "Inputs", status = "warning", solidHeader = TRUE,
+                                     "Box content here", br(), "More box content",
+                                     sliderInput("slider", "Slider input:", 1, 100, 50),
+                                     textInput("text", "Text input:")
+                                   )
+               )
+        )
+      )
+    ) # END FLUID PAGE  
+    
+  # fluidPage(
+  #   mainPanel(
+  #     
+  #     fluidRow(
+  #       column(10,h3("Infos"),
+  #              shinydashboard::box(width=12, htmlOutput("asdöfkasdfj"))
+  #              )
+  #     ),
+  #     
+  #     fluidRow(
+  #       column(10, h3("Abfragezeitraum"),
+  #              shinydashboard::box(widht=12, shinyWidgets::pickerInput("INPUT_JAHRE",choices=c(2000,2993,3393))
+  #             )
+  #           )
+  #     ),
+  #     
+  #     fluidRow(
+  #       column(10, 
+  #              h3("Raumebenen"),
+  #              h4("untertiel"),
+  #              shinydashboard::box(widht=12, shinyWidgets::pickerInput("INPUT_x1",choices=c(2000,2993,3393))),
+  #              shinydashboard::box(widht=12, shinyWidgets::pickerInput("INPUT_x2",choices=c(2000,2993,3393)))
+  #              )
+  #       )
+  #     )
+  #     
+  #   ) # end fluidpage
+  
+  ) # end taglist
 }
 
 #' Add external Resources to the Application
