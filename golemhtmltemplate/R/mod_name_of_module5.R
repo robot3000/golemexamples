@@ -35,7 +35,7 @@ mod_name_of_module5_server <- function(input, output, session){
   })
   
   output$three <- renderPlot({
-    random_image()
+    shinipsum::random_image()
   })
   
 }
